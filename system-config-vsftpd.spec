@@ -1,6 +1,6 @@
 Name: system-config-vsftpd
 Version: 0.4.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
 Group: Applications/System
@@ -8,6 +8,7 @@ License: GPLv2+
 URL: http://vsftpd-config.sf.net
 Source0: http://downloads.sourceforge.net/vsftpd-config/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch1: system-config-vsftpd-0.4.5-fix_log.patch
 
 BuildRequires: desktop-file-utils, gettext, intltool, python
 BuildArch: noarch
@@ -19,6 +20,7 @@ Very Secure FTP Daemon ( VSFTPD ).
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch1 -p1 -b .fix_log
 
 %build
 make %{?_smp_mflags}
@@ -69,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
+* Thu Oct 25 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-2
+-  fix problems with parsing file names with spaces in Transfer log
+
 * Tue Aug 28 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-1
 - fix review bugs
 - Resolve: #253858 (bugzilla.redhat.com)

@@ -1,0 +1,104 @@
+diff -up trunk/src/confChoice.py.old trunk/src/confChoice.py
+--- trunk/src/confChoice.py.old	2007-10-25 14:43:00.000000000 +0200
++++ trunk/src/confChoice.py	2007-08-30 14:53:14.000000000 +0200
+@@ -85,19 +85,6 @@ class makeChoice:
+ 
+         return self.file
+ 
+-class makeDefinePatch:
+-
+-    def close_application( self, widget, event, data=None ):
+-        self.file = self.textBox.get_text( )
+-        self.window.hide( )
+-        return self.file
+-
+-    def __init__( self, parent ):
+-
+-        pass
+-
+-
+-
+ def main():
+     gtk.main()
+     return 0        
+diff -up trunk/src/render.py.old trunk/src/render.py
+--- trunk/src/render.py.old	2007-10-25 14:43:00.000000000 +0200
++++ trunk/src/render.py	2007-10-25 14:01:21.000000000 +0200
+@@ -1753,10 +1753,10 @@ class ExperimentalLog( renderMainWindow 
+             for __line in __pLines:
+                 i = i + 1
+                 # if ? on user identification
+-                if __line[0][9][0] == "?": user = "ftp"
+-                else: user = __line[0][9]
++                if __line[9][0] == "?" or __line[9][0] == ' ': user = "ftp"
++                else: user = __line[9]
+ 
+-                if __line[0][7][0] == "i": 
+-                    self.__fileListStore.append( [__line[0][0],__ico_download,user,`__line[0][4]`] )
+-                else: self.__fileListStore.append( [__line[0][0],__ico_upload,user,`__line[0][4]`] )
++                if __line[7][0] == "i": 
++                    self.__fileListStore.append( [__line[0],__ico_download,user,`__line[4]`] )
++                else: self.__fileListStore.append( [__line[0],__ico_upload,user,`__line[4]`] )
+ 
+diff -up trunk/src/logs.py.old trunk/src/logs.py
+--- trunk/src/logs.py.old	2007-10-25 14:43:00.000000000 +0200
++++ trunk/src/logs.py	2007-10-25 14:01:42.000000000 +0200
+@@ -71,24 +71,36 @@ class Log:
+                              r"(\d+ )"              # Transfer time
+                              r"([-a-zA-Z0-9\.]+ )"  # hostname or IP        ----
+                              r"(\d+ )"              # Transfer bytes
+-                             r"(.* )"               # filename              ----
+-                             r"([ab] )"             # transfer type     
+-                             r"(. )"                # special flag
+-                             r"([io] )"             # direction of transfer ----
+-                             r"([ar] )"             # access mode anonymous/real
+-                             r"([a-zA-Z0-9\?\@]+ )"     # identification of user
+-                             r"([a-z]+ )"           # service name
+-                             r"([-a-zA-Z0-9]+ )"    # authentification
+-                             r"(.+ )"               # auth user_id
+-                             r"([c,i])"             # completion status
+-                           )
++			                 r"(.*)"		    # other
++			                 )
+ 
++        reg2exp = re.compile( r"([c,i])"             # completion status
++                            r"( .+)"               # auth user_id
++                            r"( [-a-zA-Z0-9]+)"    # authentification
++                            r"( [a-z]+)"           # service name
++                            r"( [a-zA-Z0-9\?\@]*)"     # identification of user
++                            r"( [ar])"             # access mode anonymous/real
++                            r"( [io])"             # direction of transfer ----
++                            r"( .)"                # special flag
++                            r"( [ab])"             # transfer type     
++                            r"(.*)"               # filename              ----
++                            )
+         ret = []
+ 
+         for line in self.dict[ day ][ ip ]:
+-            result = regexp.findall( line )
++            final_part1 = regexp.findall( line )
++            exp = final_part1[0][-1][::-1]
++            result2 = reg2exp.findall( exp )
++            result2[0] = result2[0][::-1]
++            
++            final_part2 = []
++            
++            for item in result2[0]:
++                final_part2.append(item[::-1])
++            
++            result = list(final_part1[0][:4]) + final_part2            
++            
+             if len( result ) != 0: ret.append( result )
+-            #print result
+         return ret
+ 
+     def get_month_number( self, month ):
+diff -up trunk/src/shell.py.old trunk/src/shell.py
+--- trunk/src/shell.py.old	2007-10-25 14:43:00.000000000 +0200
++++ trunk/src/shell.py	2007-08-30 14:53:14.000000000 +0200
+@@ -106,5 +106,3 @@ class Shell:
+ 
+         return None
+ 
+-
+-
