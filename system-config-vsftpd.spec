@@ -1,6 +1,6 @@
 Name: system-config-vsftpd
 Version: 0.4.5
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
 Group: Applications/System
@@ -71,6 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
+* Tue Oct 30 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-3
+- rebuild for rawhide
+
 * Thu Oct 25 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-2
 -  fix problems with parsing file names with spaces in Transfer log
 
