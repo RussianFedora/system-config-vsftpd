@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
-* Thu May 01 2007 Maros Barabas <mbarabas@redhat.com> - 0.5.1-1
+* Thu May 01 2008 Maros Barabas <mbarabas@redhat.com> - 0.5.1-1
 - rebase from upstream
 
 * Tue Oct 30 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-3
