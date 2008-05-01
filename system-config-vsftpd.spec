@@ -1,5 +1,5 @@
 Name: system-config-vsftpd
-Version: 0.4.5
+Version: 0.5.1
 Release: 1%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
+* Thu Apr 01 2008 Maros Barabas <mbarabas@redhat.com> - 0.5.1-1a
+- rebase from upstream 
+
 * Tue Aug 28 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-1
 - fix review bugs
 - Resolve: #253858 (bugzilla.redhat.com)
