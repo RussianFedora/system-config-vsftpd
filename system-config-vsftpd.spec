@@ -1,6 +1,6 @@
 Name: system-config-vsftpd
 Version: 0.5.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
 Group: Applications/System
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
+* Mon Dec 01 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 0.5.1-2
+- Rebuild for Python 2.6
+
 * Thu May 01 2008 Maros Barabas <mbarabas@redhat.com> - 0.5.1-1
 - rebase from upstream
 
