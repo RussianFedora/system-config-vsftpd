@@ -1,5 +1,5 @@
 Name: system-config-vsftpd
-Version: 0.5.1
+Version: 0.5.4
 Release: 1%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
@@ -9,9 +9,9 @@ URL: http://vsftpd-config.sf.net
 Source0: http://downloads.sourceforge.net/vsftpd-config/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: desktop-file-utils, gettext, intltool, python
+BuildRequires: desktop-file-utils, gettext, python
 BuildArch: noarch
-Requires: python >= 2.4, pygtk2, pygtk2-libglade, usermode
+Requires: python >= 2.4, pygtk2, pygtk2-libglade, usermode, vsftpd, gnome-python2-bonobo
 
 %description
 System-config-vsftpd is a graphical utility for administrating 
@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/pixmaps/system-config-vsftpd.png
 %{_datadir}/pixmaps/system-config-vsftpd/ico/*.png
-%{_datadir}/kontrol-panel
+%{_datadir}/kontrol-panel/
 %{_datadir}/applications
 %{_datadir}/%{name}/system-config-vsftpd.glade
 
@@ -69,14 +69,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
-* Thu May 01 2008 Maros Barabas <mbarabas@redhat.com> - 0.5.1-1
-- rebase from upstream
+* Tue Dec 02 2008 Maros Barabas <mbarabas@redhat.com> - 0.5.3-2
+- Fixed logs when access mode is group
+- Fixed missing vsftpd, gnome-python2-bonobo packages
+- Removed GnomeAppBar by GTKStatusBar
 
-* Tue Oct 30 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-3
-- rebuild for rawhide
+* Sun May 04 2008 Maros Barabas <mbarabas@redhat.com> - 0.5.3-1
+- Fixed IPv4 strip function
+- fixed save dialog bugs
+- Make save dialog sensitive to Save button and exit button
 
-* Thu Oct 25 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-2
--  fix problems with parsing file names with spaces in Transfer log
+* Thu Oct 25 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.6-1
+- fix problems with parsing file names with spaces in Transfer log 
 
 * Tue Aug 28 2007 Maros Barabas <mbarabas@redhat.com> - 0.4.5-1
 - fix review bugs
