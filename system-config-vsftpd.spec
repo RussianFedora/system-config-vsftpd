@@ -1,6 +1,6 @@
 Name: system-config-vsftpd
 Version: 0.5.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
 Group: Applications/System
@@ -11,7 +11,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: desktop-file-utils, gettext, intltool, python
 BuildArch: noarch
-Requires: python >= 2.4, pygtk2, pygtk2-libglade, usermode
+Requires: python >= 2.4, pygtk2, pygtk2-libglade, usermode, vsftpd
 
 %description
 System-config-vsftpd is a graphical utility for administrating 
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
+* Fri Feb 27 2009 Milos Jakubicek <xjakub@fi.muni.cz> - 0.5.1-4
+- Added Requires: vsftpd (fix BZ#451369)
+
 * Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
