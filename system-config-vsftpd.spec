@@ -1,6 +1,6 @@
 Name: system-config-vsftpd
 Version: 0.5.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
 Group: Applications/System
