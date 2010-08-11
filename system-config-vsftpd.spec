@@ -1,6 +1,6 @@
 Name: system-config-vsftpd
 Version: 0.5.1
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: A graphical interface for administering vsftpd server
 
 Group: Applications/System
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
+* Wed Aug 11 2010 David Malcolm <dmalcolm@redhat.com> - 0.5.1-6
+- recompiling .py files against Python 2.7 (rhbz#623407)
+
 * Sun Jul 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.1-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
