@@ -1,6 +1,6 @@
 Name: system-config-vsftpd
 Version: 0.5.1
-Release: 6%{?dist}
+Release: 6%{?dist}.1
 Summary: A graphical interface for administering vsftpd server
 
 Group: Applications/System
@@ -11,7 +11,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: desktop-file-utils, gettext, intltool, python
 BuildArch: noarch
-Requires: python >= 2.4, pygtk2, pygtk2-libglade, usermode, vsftpd
+Requires: python >= 2.4, pygtk2, pygtk2-libglade, usermode, /usr/sbin/vsftpd
 
 %description
 System-config-vsftpd is a graphical utility for administrating 
@@ -69,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0644,root,root) %config(noreplace) /etc/pam.d/%{name}
 
 %changelog
+* Mon Nov 15 2010 Arkady L. Shane <ashejn@yandx-team.ru> - 0.5.1-6.1
+- R: /usr/sbin/vsftpd as we have also vsftpd-ext
+
 * Wed Aug 11 2010 David Malcolm <dmalcolm@redhat.com> - 0.5.1-6
 - recompiling .py files against Python 2.7 (rhbz#623407)
 
